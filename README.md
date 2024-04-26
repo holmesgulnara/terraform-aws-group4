@@ -1,6 +1,7 @@
 # terraform-aws-group4
 ##  Create main.tf and input following:
 ```hcl
+module "vpc" {
     region = "us-east-2"
     version = "0.0.1"
     vpc_cidr = "10.0.0.0/16"
@@ -32,7 +33,8 @@ ports = [
   { from_port = 22, to_port = 22 },
   { from_port = 80, to_port = 80 },
   { from_port = 443, to_port = 443 }               
-]
+  ]
+}
 ```
 
 ## Prerequisites to be created locally to run this code:

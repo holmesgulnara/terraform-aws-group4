@@ -1,68 +1,8 @@
 # terraform-aws-group4
-
-### Prerequisites to run this code:
-## 1. Create blue.sh file for blue instance and input following:
-```hcl
-#!/bin/bash
-sudo yum update -y
-sudo yum install -y httpd
-sudo systemctl start httpd
-sudo systemctl enable httpd
-echo '<!DOCTYPE html>
-<html>
-<head>
-    <title>Welcome</title>
-    <style>
-        body { background-color: #0000FF; } /* Sets background to blue */
-        h1 { color: white; text-align: center; }
-        p { color: white; text-align: center; }
-    </style>
-</head>
-<body>
-    <h1>Welcome to the Blue Server!</h1>
-    <p>This is a blue-themed page served from $(hostname -f).</p>
-</body>
-</html>' | sudo tee /var/www/html/index.html > /dev/null
-```
-## 2. Create green.sh for green instance and input following:
-```hcl
-#!/bin/bash
-sudo yum update -y
-sudo yum install -y httpd
-sudo systemctl start httpd
-sudo systemctl enable httpd
-echo '<!DOCTYPE html>
-<html>
-<head>
-    <title>Welcome</title>
-    <style>
-        body { background-color: #00FF00; } /* Sets background to green */
-        h1 { color: white; text-align: center; }
-        p { color: white; text-align: center; }
-    </style>
-</head>
-<body>
-    <h1>Welcome to the Green Server!</h1>
-    <p>This is a green-themed page served from $(hostname -f).</p>
-</body>
-</html>' | sudo tee /var/www/html/index.html > /dev/null
-```
-## 3. Create manually S3 bucket with the name "group4-kaizen" and enable versioning. Ex:
-```hcl
-terraform {
-  backend "s3" {
-    bucket = "group4-kaizen"
-    key    = "path/terraform.tfstate"
-    region = "us-east-2"
-  }
-}
-```
-
-### After, initial setup is done:
-## 1. Create main.tf and input following:
+##  Create main.tf and input following:
 ```hcl
     region = "us-east-2"
-    version = "v0.0.1"
+    version = "0.0.1"
     vpc_cidr = "10.0.0.0/16"
     subnet1_cidr = "10.0.1.0/24"
     subnet2_cidr = "10.0.2.0/24"
@@ -93,4 +33,62 @@ ports = [
   { from_port = 80, to_port = 80 },
   { from_port = 443, to_port = 443 }               
 ]
+```
+
+## Prerequisites to be created locally to run this code:
+### 1. Create blue.sh file for blue instance and input following:
+```hcl
+#!/bin/bash
+sudo yum update -y
+sudo yum install -y httpd
+sudo systemctl start httpd
+sudo systemctl enable httpd
+echo '<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome</title>
+    <style>
+        body { background-color: #0000FF; } /* Sets background to blue */
+        h1 { color: white; text-align: center; }
+        p { color: white; text-align: center; }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Blue Server!</h1>
+    <p>This is a blue-themed page served from $(hostname -f).</p>
+</body>
+</html>' | sudo tee /var/www/html/index.html > /dev/null
+```
+### 2. Create green.sh for green instance and input following:
+```hcl
+#!/bin/bash
+sudo yum update -y
+sudo yum install -y httpd
+sudo systemctl start httpd
+sudo systemctl enable httpd
+echo '<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome</title>
+    <style>
+        body { background-color: #00FF00; } /* Sets background to green */
+        h1 { color: white; text-align: center; }
+        p { color: white; text-align: center; }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Green Server!</h1>
+    <p>This is a green-themed page served from $(hostname -f).</p>
+</body>
+</html>' | sudo tee /var/www/html/index.html > /dev/null
+```
+### 3. Create manually S3 bucket with the name "group4-kaizen" and enable versioning. Ex:
+```hcl
+terraform {
+  backend "s3" {
+    bucket = "group4-kaizen"
+    key    = "path/terraform.tfstate"
+    region = "us-east-2"
+  }
+}
 ```

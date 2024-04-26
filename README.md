@@ -2,8 +2,9 @@
 ##  Create main.tf and input following:
 ```hcl
 module "vpc" {
+    source = "holmesgulnara/group4/aws"
+    version = "0.0.3"
     region = "us-east-2"
-    version = "0.0.1"
     vpc_cidr = "10.0.0.0/16"
     subnet1_cidr = "10.0.1.0/24"
     subnet2_cidr = "10.0.2.0/24"

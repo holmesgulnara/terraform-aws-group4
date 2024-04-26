@@ -200,15 +200,3 @@ traffic_dist_map = {
 }
 }
 
-variable "settings" {
-  description = "A map of settings including traffic distribution and green environment flag."
-  type = list(object({
-    traffic_distribution = string
-    enable_green_env     = bool
-  }))
-
-  default = {
-    traffic_distribution = "split"
-    enable_green_env     = true
-  }
-}

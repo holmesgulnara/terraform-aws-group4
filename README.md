@@ -82,7 +82,7 @@ echo '<!DOCTYPE html>
 </body>
 </html>' | sudo tee /var/www/html/index.html > /dev/null
 ```
-### 3. Create manually S3 bucket with the name "group4-kaizen" and enable versioning. Ex:
+### 3. Create manually S3 bucket with the name "group4-kaizen" and enable versioning. Create backend.tf file with following content:
 ```hcl
 terraform {
   backend "s3" {
